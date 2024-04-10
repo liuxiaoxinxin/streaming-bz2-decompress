@@ -1,7 +1,7 @@
 import type { DecompressStreamActions, DecompressStreamCallbacks } from '../index.js';
 import decode from './bunzip.js';
 import kmpSearch from './kmpSearch.js';
-import { Buffer as BufferV6 } from 'buffer';
+import { Buffer as BufferV6 } from './buffer/index.js';
 
 interface DecompressionTask extends DecompressStreamCallbacks {
   id: number;

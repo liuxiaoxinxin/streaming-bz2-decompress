@@ -1,7 +1,7 @@
 {
   "name": "streaming-bz2-decompress-es5",
   "author": "Amit Tsur",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "types": "index.d.ts",
   "description": "Decompress a bzip2 stream in the browser - no Node.js required.",
   "repository": "github:Tsury/streaming-bz2-decompress",
@@ -25,6 +25,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
+    "base64-js": "^1.3.1",
+    "ieee754": "^1.2.1"
   }
 }
