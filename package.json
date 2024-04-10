@@ -1,5 +1,5 @@
 {
-  "name": "streaming-bz2-decompress",
+  "name": "streaming-bz2-decompress-es5",
   "author": "Amit Tsur",
   "version": "1.0.20",
   "types": "index.d.ts",
