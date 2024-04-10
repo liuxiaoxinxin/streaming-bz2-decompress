@@ -1,6 +1,7 @@
 import BitReader from './bitreader.js';
 import Stream from './stream.js';
 import CRC32 from './crc32.js';
+import { Buffer as BufferV6 } from 'buffer';
 
 const MAX_HUFCODE_BITS = 20;
 const MAX_SYMBOLS = 258;
@@ -514,7 +515,7 @@ class Bunzip {
   };
 }
 
-const coerceInputStream = (input: Buffer) => {
+const coerceInputStream = (input: BufferV6) => {
   const inputStream = new Stream();
   inputStream.pos = 0;
 
@@ -561,7 +562,7 @@ const createOutputStream = () => {
 /* Static helper functions */
 // 'input' can be a stream or a buffer
 // 'output' can be a stream or a buffer or a number (buffer size)
-const decode = (input: Buffer, checkFileCrc: boolean) => {
+const decode = (input: BufferV6, checkFileCrc: boolean) => {
   // make a stream from a buffer, if necessary
   const inputStream = coerceInputStream(input);
   const outputStream = createOutputStream();

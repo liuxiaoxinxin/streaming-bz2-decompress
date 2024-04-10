@@ -20,11 +20,12 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 import decode from './bunzip.js';
 import kmpSearch from './kmpSearch.js';
+import { Buffer as BufferV6 } from 'buffer';
 var currId = 0;
 var decompressionTasks = new Map();
 var decompressStream = function (params) {
     var id = currId++;
-    var task = __assign(__assign({ id: id }, params), { chunks: [], header: Buffer.from([]), magic: new Uint8Array() });
+    var task = __assign(__assign({ id: id }, params), { chunks: [], header: BufferV6.from([]), magic: new Uint8Array() });
     decompressionTasks.set(id, task);
     // TODO: Consider adding some queueing mechanism to avoid blocking the main thread
     // (setTimeout?)
@@ -52,7 +53,7 @@ var processCompressedData = function (id, data, isDone) {
         var compressedData = void 0;
         if (isDone) {
             // If isDone is true, it means data is empty, just decompress what's left in the chunks
-            compressedData = Buffer.concat(__spreadArray([header], chunks, true));
+            compressedData = BufferV6.concat(__spreadArray([header], chunks, true));
         }
         else {
             var newMagicIndex = -1;
@@ -90,7 +91,7 @@ var processCompressedData = function (id, data, isDone) {
                 return;
             }
             var newBlockData = data.slice(0, newMagicIndex);
-            compressedData = Buffer.concat(__spreadArray(__spreadArray([header], chunks, true), [newBlockData], false));
+            compressedData = BufferV6.concat(__spreadArray(__spreadArray([header], chunks, true), [newBlockData], false));
             var newNextBlockData = data.slice(newMagicIndex);
             task.chunks = [newNextBlockData];
         }

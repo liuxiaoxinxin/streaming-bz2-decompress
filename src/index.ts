@@ -1,6 +1,7 @@
 import type { DecompressStreamActions, DecompressStreamCallbacks } from '../index.js';
 import decode from './bunzip.js';
 import kmpSearch from './kmpSearch.js';
+import { Buffer as BufferV6 } from 'buffer';
 
 interface DecompressionTask extends DecompressStreamCallbacks {
   id: number;
@@ -19,7 +20,7 @@ const decompressStream = (params: DecompressStreamCallbacks): DecompressStreamAc
     id,
     ...params,
     chunks: [],
-    header: Buffer.from([]),
+    header: BufferV6.from([]),
     magic: new Uint8Array()
   };
 
@@ -51,11 +52,11 @@ const processCompressedData = (id: number, data: Uint8Array, isDone: boolean) =>
     const { chunks } = task;
     let { header, magic } = task;
 
-    let compressedData: Buffer;
+    let compressedData: BufferV6;
 
     if (isDone) {
       // If isDone is true, it means data is empty, just decompress what's left in the chunks
-      compressedData = Buffer.concat([header, ...chunks]);
+      compressedData = BufferV6.concat([header, ...chunks]);
     } else {
       let newMagicIndex = -1;
       let isFirst = false;
@@ -105,7 +106,7 @@ const processCompressedData = (id: number, data: Uint8Array, isDone: boolean) =>
       }
 
       const newBlockData = data.slice(0, newMagicIndex);
-      compressedData = Buffer.concat([header, ...chunks, newBlockData]) as Buffer;
+      compressedData = BufferV6.concat([header, ...chunks, newBlockData]) as BufferV6;
 
       const newNextBlockData = data.slice(newMagicIndex);
       task.chunks = [newNextBlockData];
