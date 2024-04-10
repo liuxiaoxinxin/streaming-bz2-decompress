@@ -20,7 +20,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 import decode from './bunzip.js';
 import kmpSearch from './kmpSearch.js';
-import { Buffer as BufferV6 } from './buffer/index.js';
+import { Buffer as BufferV6 } from '../buffer/index.js';
 var currId = 0;
 var decompressionTasks = new Map();
 var decompressStream = function (params) {

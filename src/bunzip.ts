@@ -1,7 +1,7 @@
 import BitReader from './bitreader.js';
 import Stream from './stream.js';
 import CRC32 from './crc32.js';
-import { Buffer as BufferV6 } from './buffer/index.js';
+import { Buffer as BufferV6 } from '../buffer/index.js';
 
 const MAX_HUFCODE_BITS = 20;
 const MAX_SYMBOLS = 258;
